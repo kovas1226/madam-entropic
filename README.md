@@ -21,8 +21,7 @@ Send a `POST` request to `https://entropic-api.onrender.com/predictlife` with JS
 }
 ```
 
-Responses include a friendly prediction and the archetypal `symbol` that inspired it. Include `"include_details": true` to receive technical data as well.
-Use `mode` to choose the response style (`poetic`, `direct`, `narrative`, or `riddle`).
+Responses include a friendly prediction intuitively based on the archetypal `symbol` that inspired it. They also provide detailed pattern recognition.
 
 Example response:
 
@@ -44,8 +43,10 @@ Use `.well-known/ai-plugin.json` and `openapi.yaml` to add this API to Custom GP
 
 ## Personality Guidance
 
-Responses adopt the voice of a wise, intuitive friend—never referencing quantum mechanics or technical terms. Encourage reflection and curiosity in each reading.
+Responses adopt the voice of a wise, intuitive friend—never referencing quantum mechanics or technical terms in API outputs. Encourage reflection and curiosity in each reading.
 
 `symbols.json` is used to persist newly generated symbols when write access is available. It includes entries for bitstrings up to six bits so the mapping covers dozens of archetypes out of the box.
+
+Example entry in `symbols.json`:
 
 This project is for entertainment and creative inspiration only.
