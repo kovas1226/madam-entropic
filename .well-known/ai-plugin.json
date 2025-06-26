@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Entropic Psychic",
+  "name_for_model": "entropic_api",
+  "description_for_human": "Receive uncanny, conversational life predictions.",
+  "description_for_model": "Provides symbolic life predictions through the /predictlife endpoint.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://entropic-api.onrender.com/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://entropic-api.onrender.com/logo.png",
+  "contact_email": "support@example.com",
+  "legal_info_url": "https://entropic-api.onrender.com/legal"
+}

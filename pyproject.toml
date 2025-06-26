@@ -1,0 +1,17 @@
+[project]
+name = "entropic-api"
+version = "0.1.0"
+description = "Quantum-backed psychic reading API"
+authors = ["Entropic Developer <dev@example.com>"]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.110",
+    "pydantic>=2.5",
+    "uvicorn>=0.24",
+    "numpy>=1.26",
+    "httpx>=0.26.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
