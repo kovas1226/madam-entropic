@@ -9,7 +9,17 @@ from . import pipeline, schemas
 app = FastAPI(title="Entropic API", version="0.1.0")
 
 
-@app.post("/predictlife", response_model=schemas.PredictionResponse)
+@app.get("/")
+async def root() -> dict:
+    """Friendly greeting shown at the API root."""
+    return {"message": "Welcome to the Entropic API"}
+
+
+@app.post(
+    "/predictlife",
+    response_model=schemas.PredictionResponse,
+    response_model_exclude_none=True,
+)
 async def predict_life(request: schemas.PredictionRequest) -> schemas.PredictionResponse:
     """Endpoint returning an archetypal life prediction."""
     result = pipeline.generate_reading(
@@ -18,11 +28,13 @@ async def predict_life(request: schemas.PredictionRequest) -> schemas.Prediction
         num_qubits=request.num_qubits,
         include_details=request.include_details,
     )
-    details = result.get("details")
-    if details is not None:
-        details = schemas.Details(**details)
+   
+    symbol = schemas.Symbol(**result["symbol"])
+    details_data = result.get("details")
+    details = schemas.Details(**details_data) if details_data is not None else None
+
     return schemas.PredictionResponse(
         prediction=result["prediction"],
-        symbol=result["symbol"],
+        symbol=symbol,
         details=details,
     )

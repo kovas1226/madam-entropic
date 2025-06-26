@@ -17,9 +17,14 @@ class Details(BaseModel):
     bitstring: str
     entropy: float
     num_qubits: int
+class Symbol(BaseModel):
+    label: str
+    category: str
+    tone: str
+    meaning: str
 
 
 class PredictionResponse(BaseModel):
     prediction: str
-    symbol: str
+    symbol: Symbol
     details: Optional[Details] = None
