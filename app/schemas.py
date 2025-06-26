@@ -1,22 +1,17 @@
 """Pydantic models for request and response."""
 
 from __future__ import annotations
-
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 
 class PredictionRequest(BaseModel):
-    question: str = Field(..., description="Your burning question")
-    seed: Optional[int] = Field(None, description="Optional seed for reproducibility")
-    num_qubits: Optional[int] = Field(3, ge=2, le=6, description="Number of qubits")
-    include_details: Optional[bool] = Field(False, description="Include technical details")
+    question: str
+    include_details: Optional[bool] = False
+
+    model_config = ConfigDict(extra="forbid")
 
 
-class Details(BaseModel):
-    bitstring: str
-    entropy: float
-    num_qubits: int
 class Symbol(BaseModel):
     label: str
     category: str
@@ -24,7 +19,12 @@ class Symbol(BaseModel):
     meaning: str
 
 
+class Details(BaseModel):
+    bitstring: str
+    entropy: float
+    num_qubits: int
+
+
 class PredictionResponse(BaseModel):
-    prediction: str
     symbol: Symbol
     details: Optional[Details] = None

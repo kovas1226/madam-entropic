@@ -1,34 +1,44 @@
 import pytest
-
-pytest.importorskip("httpx")
 from fastapi.testclient import TestClient
-
 from app.main import app
 
-client = TestClient(app)
+
+@pytest.fixture
+def client():
+    return TestClient(app)
 
 
-def test_predictlife_basic():
-    resp = client.post("/predictlife", json={"question": "Will I succeed?"})
+def test_predictlife_basic(client):
+    resp = client.post("/predictlife", json={"question": "What is my path?"})
     assert resp.status_code == 200
     data = resp.json()
-    assert "prediction" in data
+    assert "symbol" in data
     assert isinstance(data.get("symbol"), dict)
-    assert "label" in data["symbol"]
     assert "details" not in data
 
 
-def test_predictlife_with_details():
-    resp = client.post("/predictlife", json={"question": "Tell me more", "include_details": True})
+def test_predictlife_with_details(client):
+    resp = client.post(
+        "/predictlife",
+        json={"question": "Show me the details", "include_details": True},
+    )
     assert resp.status_code == 200
     data = resp.json()
-    assert "prediction" in data
+    assert "symbol" in data
     assert isinstance(data.get("symbol"), dict)
     assert "details" in data
-    assert "bitstring" in data["details"]
+    details = data["details"]
+    assert "bitstring" in details
+    assert "entropy" in details
+    assert "num_qubits" in details
 
 
-
-def test_invalid_qubits():
+def test_invalid_qubits(client):
     resp = client.post("/predictlife", json={"question": "Hi", "num_qubits": 1})
     assert resp.status_code == 422
+
+
+def test_missing_question(client):
+    resp = client.post("/predictlife", json={})
+    assert resp.status_code == 422
+    assert "detail" in resp.json()

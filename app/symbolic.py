@@ -17,18 +17,42 @@ import hashlib
 SYMBOL_FILE = Path(__file__).with_name("symbols.json")
 
 LABELS = [
-    "The Wanderer", "The Sage", "The Seeker", "The Gatekeeper", "The Phoenix",
-    "The Mirror", "The Oracle", "The Trickster", "The Dreamer", "The Alchemist",
+    "The Wanderer",
+    "The Sage",
+    "The Seeker",
+    "The Gatekeeper",
+    "The Phoenix",
+    "The Mirror",
+    "The Oracle",
+    "The Trickster",
+    "The Dreamer",
+    "The Alchemist",
 ]
 
 CATEGORIES = [
-    "Journey", "Wisdom", "Quest", "Threshold", "Rebirth",
-    "Reflection", "Prophecy", "Chaos", "Vision", "Transformation",
+    "Journey",
+    "Wisdom",
+    "Quest",
+    "Threshold",
+    "Rebirth",
+    "Reflection",
+    "Prophecy",
+    "Chaos",
+    "Vision",
+    "Transformation",
 ]
 
 TONES = [
-    "Adventurous", "Reflective", "Curious", "Mysterious", "Transformative",
-    "Playful", "Insightful", "Disruptive", "Dreamlike", "Alchemical",
+    "Adventurous",
+    "Reflective",
+    "Curious",
+    "Mysterious",
+    "Transformative",
+    "Playful",
+    "Insightful",
+    "Disruptive",
+    "Dreamlike",
+    "Alchemical",
 ]
 
 MEANINGS = [
@@ -45,9 +69,24 @@ MEANINGS = [
 ]
 
 ORDINALS = [
-    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-    "XI", "XII", "XIII", "XIV", "XV", "XVI",
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "VIII",
+    "IX",
+    "X",
+    "XI",
+    "XII",
+    "XIII",
+    "XIV",
+    "XV",
+    "XVI",
 ]
+
 
 def load_symbols() -> Dict[str, Dict[str, Any]]:
     """Return stored symbol mappings or built-in defaults."""
@@ -82,6 +121,7 @@ def load_symbols() -> Dict[str, Dict[str, Any]]:
         },
     }
 
+
 def save_symbols(symbols: Dict[str, Dict[str, Any]]) -> None:
     """Persist symbol mappings if possible, ignoring write errors."""
     try:
@@ -89,6 +129,7 @@ def save_symbols(symbols: Dict[str, Dict[str, Any]]) -> None:
             json.dump(symbols, f, indent=2, ensure_ascii=False)
     except OSError:
         pass
+
 
 def _generate_symbol(bitstring: str) -> Dict[str, str]:
     """Create a deterministic symbol object for an unseen bitstring."""
@@ -104,6 +145,7 @@ def _generate_symbol(bitstring: str) -> Dict[str, str]:
         "tone": tone,
         "meaning": meaning,
     }
+
 
 def map_bitstring(bitstring: str) -> Dict[str, Any]:
     """Map a measured bitstring to an archetypal symbol object."""

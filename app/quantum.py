@@ -13,7 +13,9 @@ class QState:
         if not 2 <= num_qubits <= 6:
             raise ValueError("num_qubits must be between 2 and 6")
         self.num_qubits = num_qubits
-        self.state: NDArray[np.complex128] = np.zeros(2 ** num_qubits, dtype=np.complex128)
+        self.state: NDArray[np.complex128] = np.zeros(
+            2**num_qubits, dtype=np.complex128
+        )
         self.state[0] = 1.0
 
     def apply_gate(self, gate: NDArray[np.complex128], qubit: int) -> None:
@@ -25,14 +27,14 @@ class QState:
 
     def apply_cnot(self, control: int, target: int) -> None:
         """Apply a CNOT gate."""
-        size = 2 ** self.num_qubits
+        size = 2**self.num_qubits
         mat = np.zeros((size, size), dtype=np.complex128)
         for i in range(size):
             b = format(i, f"0{self.num_qubits}b")
-            if b[-1 - control] == '1':
+            if b[-1 - control] == "1":
                 flipped = list(b)
-                flipped[-1 - target] = '0' if flipped[-1 - target] == '1' else '1'
-                j = int(''.join(flipped), 2)
+                flipped[-1 - target] = "0" if flipped[-1 - target] == "1" else "1"
+                j = int("".join(flipped), 2)
             else:
                 j = i
             mat[j, i] = 1
@@ -69,4 +71,3 @@ def random_circuit(state: QState, rng: np.random.Generator) -> None:
         state.apply_gate(gate, q)
     if state.num_qubits >= 2:
         state.apply_cnot(0, 1)
-

@@ -7,7 +7,7 @@ servers:
 paths:
   /predictlife:
     post:
-      summary: Get a personalized life prediction
+      summary: Get a symbolic impression
       requestBody:
         required: true
         content:
@@ -16,7 +16,7 @@ paths:
               $ref: '#/components/schemas/PredictionRequest'
       responses:
         '200':
-          description: Prediction response
+          description: Symbolic impression
           content:
             application/json:
               schema:
@@ -28,67 +28,34 @@ components:
       properties:
         question:
           type: string
-          description: A brief question for the oracle.
-          example: What new paths await?
-        seed:
-          type: integer
-          nullable: true
-          description: Optional seed for reproducible results.
-        num_qubits:
-          type: integer
-          minimum: 2
-          maximum: 6
-          default: 3
-          description: Number of qubits used internally.
         include_details:
           type: boolean
-          default: false
-          description: Return technical details if true.
       required:
         - question
-    Details:
-      type: object
-      properties:
-        bitstring:
-          type: string
-          description: Measured bitstring from the simulation.
-        entropy:
-          type: number
-          description: Shannon entropy prior to measurement.
-        num_qubits:
-          type: integer
-          description: Number of qubits used.
-    PredictionResponse:
-      type: object
-      properties:
-        prediction:
-          type: string
-          description: Conversational life prediction.
-        symbol:
-          $ref: '#/components/schemas/Symbol'
-        details:
-          $ref: '#/components/schemas/Details'
-          nullable: true
-      required:
-        - prediction
-        - symbol
     Symbol:
       type: object
       properties:
         label:
           type: string
-          description: Name of the archetypal symbol.
         category:
           type: string
-          description: Mythic category or origin.
         tone:
           type: string
-          description: Narrative tone of the symbol.
         meaning:
           type: string
-          description: Short poetic interpretation.
-      required:
-        - label
-        - category
-        - tone
-        - meaning
+    Details:
+      type: object
+      properties:
+        bitstring:
+          type: string
+        entropy:
+          type: number
+        num_qubits:
+          type: integer
+    PredictionResponse:
+      type: object
+      properties:
+        symbol:
+          $ref: '#/components/schemas/Symbol'
+        details:
+          $ref: '#/components/schemas/Details'
