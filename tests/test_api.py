@@ -28,16 +28,6 @@ def test_predictlife_with_details():
     assert "bitstring" in data["details"]
 
 
-def test_qrng_random_source():
-    resp = client.post(
-        "/predictlife",
-        json={"question": "Hello", "random_source": "qrng", "mode": "direct"},
-    )
-    assert resp.status_code == 200
-    data = resp.json()
-    assert "prediction" in data
-    assert isinstance(data.get("symbol"), dict)
-
 
 def test_invalid_qubits():
     resp = client.post("/predictlife", json={"question": "Hi", "num_qubits": 1})

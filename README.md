@@ -16,11 +16,13 @@ Send a `POST` request to `https://entropic-api.onrender.com/predictlife` with JS
 ```json
 {
   "question": "Will I find adventure?",
-  "include_details": false
+  "include_details": false,
+  "mode": "poetic"
 }
 ```
 
 Responses include a friendly prediction and the archetypal `symbol` that inspired it. Include `"include_details": true` to receive technical data as well.
+Use `mode` to choose the response style (`poetic`, `direct`, `narrative`, or `riddle`).
 
 Example response:
 
@@ -46,4 +48,4 @@ Responses adopt the voice of a wise, intuitive friend—never referencing quantu
 
 `symbols.json` is used to persist newly generated symbols when write access is available. It includes entries for bitstrings up to six bits so the mapping covers dozens of archetypes out of the box.
 
-This project is for entertainment and creative inspiration only
+This project is for entertainment and creative inspiration only.
