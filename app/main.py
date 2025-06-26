@@ -4,6 +4,12 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello, world! Your Entropic API is running over HTTP."}
+    
 from . import pipeline, schemas
 
 app = FastAPI(title="Entropic API", version="0.1.0")
