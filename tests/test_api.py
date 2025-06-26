@@ -1,3 +1,6 @@
+import pytest
+
+pytest.importorskip("httpx")
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -23,6 +26,17 @@ def test_predictlife_with_details():
     assert isinstance(data.get("symbol"), dict)
     assert "details" in data
     assert "bitstring" in data["details"]
+
+
+def test_qrng_random_source():
+    resp = client.post(
+        "/predictlife",
+        json={"question": "Hello", "random_source": "qrng", "mode": "direct"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "prediction" in data
+    assert isinstance(data.get("symbol"), dict)
 
 
 def test_invalid_qubits():
