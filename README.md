@@ -1,7 +1,8 @@
 # Entropic Psychic API
 
 A conversational API delivering symbolic life predictions backed by an internal quantum simulator.
-
+## Vision
+Entropic Psychic API aims to inspire creativity and provide symbolic insights into life's questions using cutting-edge quantum simulation and AI technologies.
 ## Setup
 
 ```bash
